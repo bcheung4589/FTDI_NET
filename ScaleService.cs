@@ -89,7 +89,7 @@ public class ScaleService : IDisposable
     /// Try connecting to the Scale.
     /// </summary>
     /// <returns></returns>
-    public async Task<bool> AsyncTryConnect()
+    public async Task<bool> TryConnectAsync()
     {
         ErrorMessage = null;
 
@@ -110,7 +110,7 @@ public class ScaleService : IDisposable
         Console.WriteLine(ErrorMessage);
         await Task.Delay(RETRY_WAIT * 1000);
 
-        return await AsyncTryConnect();
+        return await TryConnectAsync();
     }
 
     /// <summary>
@@ -207,7 +207,7 @@ public class ScaleService : IDisposable
     /// Get the information of the available devices.
     /// </summary>
     /// <returns></returns>
-    public FTDI.FT_DEVICE_INFO_NODE[]? GetDeviceInfoList()
+    private FTDI.FT_DEVICE_INFO_NODE[]? GetDeviceInfoList()
     {
         var deviceCount = CountDevices();
         var deviceList = new FTDI.FT_DEVICE_INFO_NODE[deviceCount];

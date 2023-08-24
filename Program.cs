@@ -2,7 +2,7 @@
 
 // attempt connecting to scale
 using var scaleService = new ScaleService();
-if (!(await scaleService.AsyncTryConnect()))
+if (!(await scaleService.TryConnectAsync()))
 {
     return;
 }
