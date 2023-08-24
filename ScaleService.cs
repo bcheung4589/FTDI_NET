@@ -220,7 +220,7 @@ public class ScaleService : IDisposable
     }
 
     /// <summary>
-    /// Wait for receiving data. When data is read, DataReceived(e) is called.
+    /// Keep waiting for receive data-signals. When signals are received, the data is read and DataReceived(e) is called.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="eventArgs"></param>
