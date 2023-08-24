@@ -229,10 +229,10 @@ public class ScaleService : IDisposable
         uint bytesAvailable = 0;
         while (true)
         {
-            // wait for data event
+            // wait for FTDI event notifications (signals)
             _receivedDataEvent.WaitOne();
 
-            // check if data is vailable
+            // check if data is available
             FTDI.FT_STATUS status = _ftdi.GetRxBytesAvailable(ref bytesAvailable);
             if (status != FTDI.FT_STATUS.FT_OK)
             {
@@ -246,10 +246,11 @@ public class ScaleService : IDisposable
             // read the data
             uint numBytesRead = 0;
             var readData = new byte[bytesAvailable];
-            _ = _ftdi.Read(readData, bytesAvailable, ref numBytesRead);
-
-            // give FTDI time to read all the data
-            await Task.Delay(100);
+            status = _ftdi.Read(readData, bytesAvailable, ref numBytesRead);
+            if (status != FTDI.FT_STATUS.FT_OK || numBytesRead < 1)
+            {
+                continue;
+            }
 
             // convert to string and trim empty spaces
             var data = Encoding.UTF8.GetString(readData).Trim().Replace(" ", "");
