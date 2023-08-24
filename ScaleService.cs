@@ -258,7 +258,7 @@ public class ScaleService : IDisposable
                 continue;
             }
 
-            // get the serialnr to identify the sender and trigger DataReceived(e)
+            // get the serialNr to identify the sender and trigger DataReceived(e)
             _ftdi.GetSerialNumber(out string serialNr);
             DataReceived(new DataReceivedEventArgs
             {
