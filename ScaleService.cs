@@ -249,7 +249,7 @@ public class ScaleService : IDisposable
             _ = _ftdi.Read(readData, bytesAvailable, ref numBytesRead);
 
             // give FTDI time to read all the data
-            await Task.Delay(200);
+            await Task.Delay(100);
 
             // convert to string and trim empty spaces
             var data = Encoding.UTF8.GetString(readData).Trim().Replace(" ", "");
