@@ -269,8 +269,11 @@ public class ScaleService : IDisposable
     }
 
     /// <summary>
-    /// Close FTDI on disposing.
+    /// Release all resources used by ScaleService.
     /// </summary>
     public void Dispose()
-        => _ftdi?.Close();
+    {
+        _ftdi?.Close();
+        _receivedDataEvent?.Close();
+    }
 }
