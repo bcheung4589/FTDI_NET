@@ -122,7 +122,7 @@ public class ScaleService : IDisposable
         _ftdi ??= new FTDI();
 
         // check for any devices
-        int deviceCount = CountDevices();
+        var deviceCount = CountDevices();
         if (deviceCount <= 0)
         {
             ErrorMessage = "No devices to found.";
@@ -189,7 +189,7 @@ public class ScaleService : IDisposable
     private int CountDevices()
     {
         uint deviceCount = 0;
-        FTDI.FT_STATUS ftStatus = _ftdi.GetNumberOfDevices(ref deviceCount);
+        var ftStatus = _ftdi.GetNumberOfDevices(ref deviceCount);
         if (ftStatus != FTDI.FT_STATUS.FT_OK)
         {
             return 0;
@@ -245,7 +245,7 @@ public class ScaleService : IDisposable
 
             // read the data
             uint numBytesRead = 0;
-            byte[] readData = new byte[bytesAvailable];
+            var readData = new byte[bytesAvailable];
             _ = _ftdi.Read(readData, bytesAvailable, ref numBytesRead);
 
             // give FTDI time to read all the data
