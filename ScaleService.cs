@@ -195,11 +195,6 @@ public class ScaleService : IDisposable
             return 0;
         }
 
-        if (deviceCount < 1)
-        {
-            return 0;
-        }
-
         return (int)deviceCount;
     }
 
@@ -212,11 +207,7 @@ public class ScaleService : IDisposable
         var deviceCount = CountDevices();
         var deviceList = new FTDI.FT_DEVICE_INFO_NODE[deviceCount];
         var ftStatus = _ftdi.GetDeviceList(deviceList);
-        if (ftStatus != FTDI.FT_STATUS.FT_OK)
-        {
-            return null;
-        }
-        return deviceList;
+        return ftStatus == FTDI.FT_STATUS.FT_OK ? deviceList : null;
     }
 
     /// <summary>
