@@ -157,7 +157,7 @@ public class ScaleService : IDisposable
 
         // create background worker to listen to EventNotifications
         _dataReceivedHandler = new BackgroundWorker();
-        _dataReceivedHandler.DoWork += ReadDataAsync;
+        _dataReceivedHandler.DoWork += ReadData;
         if (!_dataReceivedHandler.IsBusy)
         {
             // start listening
@@ -224,7 +224,7 @@ public class ScaleService : IDisposable
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="eventArgs"></param>
-    private async void ReadDataAsync(object? sender, DoWorkEventArgs eventArgs)
+    private void ReadData(object? sender, DoWorkEventArgs eventArgs)
     {
         uint bytesAvailable = 0;
         while (true)
@@ -270,7 +270,7 @@ public class ScaleService : IDisposable
     }
 
     /// <summary>
-    /// Release all resources used by ScaleService.
+    /// Release all resources used by current ScaleService.
     /// </summary>
     public void Dispose()
     {
