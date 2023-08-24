@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="FTD2XX_NET">
       <HintPath>..\FTD2XX_NET.dll</HintPath>
     </Reference>
